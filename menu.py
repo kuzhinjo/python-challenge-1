@@ -12,7 +12,7 @@ menu = {
         "Sushi": 7.49,
         "Pad Thai": 6.99,
         "Pizza": {
-            "Cheese": 8.99,
+            "Cheese": 8.992,
             "Pepperoni": 10.99,
             "Vegetarian": 9.99
         },
@@ -127,7 +127,8 @@ while True:
             if menu_selection.isdigit():
                 if int(menu_selection) >= item_counter:
                     print(menu_selection+" IS NOT a valid menu selection Returning to main menu")
-            else:         
+                    menu_item = menu
+            else:       
                 print(menu_selection+" IS NOT a valid menu selection Returning to main menu")
 
 
