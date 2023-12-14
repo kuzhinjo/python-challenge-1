@@ -51,7 +51,8 @@ menu = {
 }
 
 menu_dashes = "-" * 42
-
+cust_order = []
+order = {}
 # Launch the store and present a greeting to the customer
 print("Welcome to the variety food truck.")
 
@@ -65,6 +66,7 @@ while True:
     i = 1
     # Create a dictionary to store the menu for later retrieval 
     menu_items = {}
+
 
     # Print the options to choose from menu headings (all the first level 
     # dictionary items in menu).
@@ -123,11 +125,94 @@ while True:
                     item_counter += 1
             
             menu_selection = input("Select An Item Or Press Enter To Return To The Main Menu.")
-
+            menu_item = ""
+            price = ""
             if menu_selection.isdigit():
                 if int(menu_selection) >= item_counter:
                     print(menu_selection+" IS NOT a valid menu selection Returning to main menu")
-                    menu_item = menu
+                else:
+                    item_counter = 1
+                    for key, value in menu[menu_category_name].items():
+                        if type(value) is dict:
+                            # Iterate through the dictionary items
+                            for key2, value2 in value.items():
+                                if int(menu_selection) == item_counter:
+                                    menu_item = key+" "+key2
+                                    price = value2
+
+                                item_counter += 1
+                        else:
+                            # Print the menu item
+                            if int(menu_selection) == item_counter:
+                                menu_item = key
+                                price = value                           
+                            item_counter += 1
+                quantity = input("Select number of quantities: ")
+                if not quantity.isdigit():
+                    quantity = 1
+                order = {"Item Name": menu_item, "Price": price, "Quantity":quantity}
+                cust_order.append(order)
+
+                # Provide exit option
+                while True:
+                    # Ask the customer if they would like to order anything else
+                    keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ")
+
+                    # Check the customer's input
+                    match keep_ordering.lower():
+                        # Customer chose yes
+                        case 'y':
+                            # Keep ordering
+                            place_order = True
+                            # Exit the keep ordering question loop
+                            break
+                        # Customer chose no
+                        case 'n':
+                            # Complete the order
+                            place_order = False
+                            # Since the customer decided to stop ordering, thank them for their order
+                            print("-----------------------------|-----------------|-------------")
+                            print("                Thank you for your order                     ")
+                            # Display the heading for the sub-menu
+                            print("-----------------------------|-----------------|-------------")
+                            print("Final Order")
+                            print("-----------------------------|-----------------|-------------")
+                            print("Item name #                  | Price           | Quantity")
+                            print("-----------------------------|-----------------|-------------")                            
+                            orders_list = []        
+                            totalPrice = 0.0                                                   
+                            for order in cust_order:
+                                order_list =[]                         
+                                for key, value in order.items():
+                                    # Add 1 to the item_counter
+                                    order_list.append(value)
+                                    # print(order_list)s
+                                orders_list.append(order_list)
+                            for order in orders_list:
+                                # Print the order
+                                num_item_spaces = 29 - len(order[0])
+                                item_spaces = " " * num_item_spaces
+                                num_item_spaces_1 = 15 - len(str(order[1]))
+                                item_spaces_1 = " " * num_item_spaces_1                                
+                                print(f"{order[0]}{item_spaces}| "
+                                        + f"${order[1]}{item_spaces_1}| {order[2]}")
+                                totalPrice += order[1]*float(order[2])
+                            print("-----------------------------|-----------------|-------------")
+                            print(f"Total Price: {round(totalPrice,2)}")
+                            print("-----------------------------|-----------------|-------------")
+                            # Get the customer's input
+                            quit_ordering = input("Type q To Start A New Order : ")
+
+                            # Exit the loop if user typed 'q'
+                            if quit_ordering == 'q':
+                                cust_order = []
+                                break
+
+                        # Customer typed an invalid input
+                        case _:
+                            # Tell the customer to try again
+                            print("I didn't understand your response. Please try again.")          
+
             else:       
                 print(menu_selection+" IS NOT a valid menu selection Returning to main menu")
 
