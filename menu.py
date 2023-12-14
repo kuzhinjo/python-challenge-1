@@ -220,11 +220,8 @@ while True:
                         case _:
                             # Tell the customer to try again
                             print("I didn't understand your response. Please try again.")          
-
             else:       
                 print(menu_selection+" IS NOT a valid menu selection Returning to main menu")
-
-
         else:
             # Tell the customer they didn't select a menu option
             print(f"{menu_category} was not a menu option.")
