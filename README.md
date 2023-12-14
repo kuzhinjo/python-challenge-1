@@ -1,6 +1,4 @@
-# python-challenge-1
-python-challenge-1
-## Challenge Printing the Menu, Taking the Order and Printing Receipt 
+## Python Challenge 1 - Printing the Menu, Taking the Order and Printing Receipt 
 
 * Steps while running the program
 
