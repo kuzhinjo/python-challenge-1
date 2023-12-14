@@ -1,6 +1,6 @@
 ## Python Challenge 1 - Printing the Menu, Taking the Order and Printing Receipt 
 
-* Steps while running the program
+* Steps while running the program menu.py
 
 1. Display Main menu and Sub Menu based on user selection
 2. Take the order and quantity from user input

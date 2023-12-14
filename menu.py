@@ -150,7 +150,7 @@ while True:
                                 menu_item = key
                                 price = value                           
                             item_counter += 1
-                quantity = input("Select number of quantities: ")
+                quantity = input("Select number of quantity(es): ")
                 if not quantity.isdigit():
                     quantity = 1
                 # Create a dictonary for the user item selection
